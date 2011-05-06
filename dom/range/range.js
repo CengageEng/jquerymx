@@ -41,6 +41,10 @@ $.Range = function(range){
 		
 	} else if (range.clientX || range.pageX || range.left) {
 		this.rangeFromPoint(range)
+	} else if (range.originalEvent && range.originalEvent.touches && range.originalEvent.touches.length) {
+		this.rangeFromPoint(range.originalEvent.touches[0])
+	} else if (range.originalEvent && range.originalEvent.changedTouches && range.originalEvent.changedTouches.length) {
+		this.rangeFromPoint(range.originalEvent.changedTouches[0])
 	} else {
 		this.range = range;
 	} 

@@ -49,4 +49,24 @@ test("basic range", function(){
 	console.log(start, rect)
 	});
 
+	test("rects", function(){
+		$("#qunit-test-area")
+			.html("<p id='1'>012<span>34</span>56789</p>");
+		$('#1').selection(1,5);
+		var range = $.Range.current(),
+			rects = range.rects();
+		equals(rects.length, 2, "2 rects found")
+		console.log(rects)
+	});
+
+	test("compare", function(){
+		$("#qunit-test-area")
+			.html("<p id='1'>012<span>34</span>56789</p>");
+		$('#1').selection(1,5);
+		var range1 = $.Range.current();
+		$('#1').selection(2,3);
+		var range2 = $.Range.current();
+		var pos = range1.compare("START_TO_START", range2)
+		equals(pos, -1, "pos works")
+	});
 });
