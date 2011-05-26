@@ -388,7 +388,7 @@ steal.plugins('jquery/view', 'jquery/lang/rsplit').then(function( $ ) {
 				out : 'try { with(_VIEW) { with (_CONTEXT) {' + template + " return ___v1ew.join('');}}}catch(e){e.lineNumber=null;throw e;}"
 			};
 		//use eval instead of creating a function, b/c it is easier to debug
-		myEval.call(out,'this.process = (function(_CONTEXT,_VIEW){' + out.out + '});\r\n//@ sourceURL='+name+".js");
+		myEval.call(out,'this.process = (function(_CONTEXT,_VIEW){' + out.out + '});\r\n// @ sourceURL='+name+".js");
 		return out;
 	};
 
