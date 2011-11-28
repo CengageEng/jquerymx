@@ -15,53 +15,47 @@ steal('jquery/class', 'jquery/lang/string', function() {
 		trigger = function(obj, event, args){
 			$(obj).triggerHandler( event, args );
 		},
-		reqType = /GET|POST|PUT|DELETE/i,
 		
 		// used to make an ajax request where
-		// ajaxOb - a string ajax name
-		// attrs - the attributes or data that will be sent
+		// ajaxOb - a bunch of options
+		// data - the attributes or data that will be sent
 		// success - callback function
 		// error - error callback
 		// fixture - the name of the fixture (typically a path or something on $.fixture
 		// type - the HTTP request type (defaults to "post")
 		// dataType - how the data should return (defaults to "json")
-		ajax = function( ajaxOb, attrs, success, error, fixture, type, dataType ) {
-			// set the dataType
-			var dataType = dataType || "json",
-				// 
-				src = "",
-				tmp;
+		ajax = function(ajaxOb, data, success, error, fixture, type, dataType ) {
+
+			
+			// if we get a string, handle it
 			if ( typeof ajaxOb == "string" ) {
 				// if there's a space, it's probably the type
 				var sp = ajaxOb.indexOf(" ")
-				if ( sp > 2 && sp < 7 ) {
-					tmp = ajaxOb.substr(0, sp);
-					if ( reqType.test(tmp) ) {
-						type = tmp;
-					} else {
-						dataType = tmp;
+				if ( sp > -1 ) {
+					ajaxOb = {
+						url :  ajaxOb.substr(sp + 1),
+						type :ajaxOb.substr(0, sp)
 					}
-					src = ajaxOb.substr(sp + 1)
 				} else {
-					src = ajaxOb;
+					ajaxOb = {url : ajaxOb}
 				}
 			}
 
 			// if we are a non-array object, copy to a new attrs
-			typeof attrs == "object" && (!isArray(attrs)) && (attrs = extend({}, attrs));
+			ajaxOb.data = typeof data == "object" && !isArray(data) ?
+				extend(ajaxOb.data || {}, data) : data;
+	
 
 			// get the url with any templated values filled out
-			var url = $String.sub(src, attrs, true);
+			ajaxOb.url = $String.sub(ajaxOb.url, ajaxOb.data, true);
 
-			return $.ajax({
-				url: url,
-				data: attrs,
-				success: success,
-				error: error,
+			return $.ajax($.extend({
 				type: type || "post",
-				dataType: dataType,
-				fixture: fixture
-			});
+				dataType: dataType ||"json",
+				fixture: fixture,
+				success : success,
+				error: error
+			},ajaxOb));
 		},
 		// guesses at a fixture name where
 		// extra - where to look for 'MODELNAME'+extra fixtures (ex: "Create" -> '-recipeCreate')
@@ -140,7 +134,9 @@ steal('jquery/class', 'jquery/lang/string', function() {
 				// the args to pass to the ajax method
 				args = [self.serialize(), resolve, reject],
 				// the Model
-				model = self.constructor;
+				model = self.constructor,
+				jqXHR,
+				promise = deferred.promise();
 
 			// destroy does not need data
 			if ( type == 'destroy' ) {
@@ -156,10 +152,15 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			deferred.then(success);
 			deferred.fail(error);
 
-			// call the 
-			model[type].apply(model, args);
-
-			return deferred.promise();
+			// call the model's function and hook up
+			// abort
+			jqXHR = model[type].apply(model, args);
+			if(jqXHR && jqXHR.abort){
+				promise.abort = function(){
+					jqXHR.abort();
+				}
+			}
+			return promise;
 		},
 		// a quick way to tell if it's an object and not some string
 		isObject = function( obj ) {
@@ -540,7 +541,7 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			 * @param {Function} error a function to callback if something goes wrong.  
 			 */
 			return function( attrs, success, error ) {
-				return ajax(str, attrs, success, error, fixture(this, "Create", "-restCreate"))
+				return ajax(str || "{_shortName}", attrs, success, error, fixture(this, "Create", "-restCreate"))
 			};
 		},
 		update: function( str ) {
@@ -615,7 +616,7 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			 * @param {Function} error a function to callback if something goes wrong.  
 			 */
 			return function( id, attrs, success, error ) {
-				return ajax(str, addId(this, attrs, id), success, error, fixture(this, "Update", "-restUpdate"), "put")
+				return ajax( str || "{_shortName}s/"+id+".json", addId(this, attrs, id), success, error, fixture(this, "Update", "-restUpdate"), "put")
 			}
 		},
 		destroy: function( str ) {
@@ -649,7 +650,7 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			return function( id, success, error ) {
 				var attrs = {};
 				attrs[this.id] = id;
-				return ajax(str, attrs, success, error, fixture(this, "Destroy", "-restDestroy"), "delete")
+				return ajax( str || "{_shortName}s/"+id+".json", attrs, success, error, fixture(this, "Destroy", "-restDestroy"), "delete")
 			}
 		},
 
@@ -689,7 +690,7 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			 * @param {Function} error
 			 */
 			return function( params, success, error ) {
-				return ajax(str || this.shortName + "s.json", params, success, error, fixture(this, "s"), "get", "json " + this._shortName + ".models");
+				return ajax( str ||  "{_shortName}s.json", params, success, error, fixture(this, "s"), "get", "json " + this._shortName + ".models");
 			};
 		},
 		findOne: function( str ) {
@@ -725,7 +726,7 @@ steal('jquery/class', 'jquery/lang/string', function() {
 			 * @param {Function} error
 			 */
 			return function( params, success, error ) {
-				return ajax(str, params, success, error, fixture(this), "get", "json " + this._shortName + ".model");
+				return ajax(str || "{_shortName}s/{"+this.id+"}.json", params, success, error, fixture(this), "get", "json " + this._shortName + ".model");
 			};
 		}
 	};
@@ -834,6 +835,11 @@ steal('jquery/class', 'jquery/lang/string', function() {
 		 * This points tasks and owner properties to use 
 		 * <code>Task.models</code> and <code>Person.model</code>
 		 * to convert the raw data into an array of Tasks and a Person.
+		 * 
+		 * Note that the full names of the models themselves are <code>App.Models.Task</code>
+		 * and <code>App.Models.Person</code>. The _.model_ and _.models_ parts are appended
+		 * for the benefit of [jQuery.Model.static.convert convert] to identify the types as 
+		 * models.
 		 * 
 		 * @demo jquery/model/pages/associations.html
 		 * 

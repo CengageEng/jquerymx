@@ -387,7 +387,7 @@ steal("jquery").then(function( $ ) {
 		// if we have an inline template, derive the suffix from the 'text/???' part
 		// this only supports '<script></script>' tags
 		if ( el = document.getElementById(url) ) {
-			suffix = el.type.match(/\/[\d\w]+$/)[0].replace(/^\//, '.');
+			suffix = "."+el.type.match(/\/(x\-)?(.+)/)[2];
 		}
 
 		// if there is no suffix, add one
@@ -535,7 +535,7 @@ steal("jquery").then(function( $ ) {
 			this.types["." + info.suffix] = info;
 
 			if ( window.steal ) {
-				steal.type(info.suffix + " view js", function( options, orig, success, error ) {
+				steal.type(info.suffix + " view js", function( options, success, error ) {
 					var type = $view.types["." + options.type],
 						id = toId(options.rootSrc);
 
@@ -576,7 +576,7 @@ steal("jquery").then(function( $ ) {
 
 	});
 	if ( window.steal ) {
-		steal.type("view js", function( options, orig, success, error ) {
+		steal.type("view js", function( options, success, error ) {
 			var type = $view.types["." + options.type],
 				id = toId(options.rootSrc);
 
