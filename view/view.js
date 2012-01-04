@@ -16,6 +16,8 @@ steal("jquery").then(function( $ ) {
 	 * @test jquery/view/qunit.html
 	 * @download dist/jquery.view.js
 	 * 
+	 * @description A JavaScript template framework.
+	 * 
 	 * View provides a uniform interface for using templates with 
 	 * jQuery. When template engines [jQuery.View.register register] 
 	 * themselves, you are able to:
@@ -62,7 +64,7 @@ steal("jquery").then(function( $ ) {
 	 * <tr><td>[jQuery.fn.before before] </td><td> <code>$('#bar').before('temp.jaml',{});</code></td></tr>
 	 * <tr><td>[jQuery.fn.html html] </td><td> <code>$('#bar').html('temp.jaml',{});</code></td></tr>
 	 * <tr><td>[jQuery.fn.prepend prepend] </td><td> <code>$('#bar').prepend('temp.jaml',{});</code></td></tr>
-	 * <tr><td>[jQuery.fn.replaceWith replaceWith] </td><td> <code>$('#bar').replaceWidth('temp.jaml',{});</code></td></tr>
+	 * <tr><td>[jQuery.fn.replaceWith replaceWith] </td><td> <code>$('#bar').replaceWith('temp.jaml',{});</code></td></tr>
 	 * <tr><td>[jQuery.fn.text text] </td><td> <code>$('#bar').text('temp.jaml',{});</code></td></tr>
 	 * </table>
 	 * 
@@ -405,7 +407,7 @@ steal("jquery").then(function( $ ) {
 			var sub = url.substr(2);
 			url = typeof steal === "undefined" ? 
 				url = "/" + sub : 
-				steal.root.mapJoin(sub);
+				steal.root.mapJoin(sub) +'';
 		}
 
 		//set the template engine type 

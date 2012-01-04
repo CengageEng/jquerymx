@@ -35,7 +35,7 @@ steal('jquery/dom',
 			var url = settings.fixture;
 			
 			if (/^\/\//.test(url) ) {
-				url = steal.root.mapJoin(settings.fixture.substr(2));
+				url = steal.root.mapJoin(settings.fixture.substr(2))+'';
 			}
 			//@steal-remove-start
 			steal.dev.log("looking for fixture in " + url);
@@ -432,7 +432,7 @@ steal('jquery/dom',
 				fixtureUrlAdjusted = fixtureUrl.replace('.', '\\.').replace('?', '\\?'),
 				res = new RegExp(fixtureUrlAdjusted.replace(replacer, function(whole, part){
 			  		order.push(part)
-			 		 return "([^\/])+"
+			 		 return "([^\/]+)"
 				})+"$").exec(url),
 				data = {};
 			
