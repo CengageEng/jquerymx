@@ -421,10 +421,6 @@ function( $ ) {
 			return location.hash == "#!" + $.route.param(options)
 		}
 	});
-	// onready
-	$(function() {
-		$.route.ready();
-	});
 	
     // The functions in the following list applied to $.route (e.g. $.route.attr('...')) will
     // instead act on the $.route.data Observe.
@@ -468,4 +464,9 @@ function( $ ) {
 	$.route.bind("change", throttle(function() {
 		location.hash = "#!" + $.route.param($.route.serialize())
 	}));
+	
+	// onready
+	$(function() {
+		$.route.ready();
+	});
 })
