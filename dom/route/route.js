@@ -467,6 +467,9 @@ function( $ ) {
 	
 	// onready
 	$(function() {
-		$.route.ready();
+		// IE8 is currently resolving document.ready handlers prior to steal
+		// incrementing readyWait in production mode. setTimeout allows for the
+		// current thread to complete before the document.ready handler is fired.
+		setTimeout($.route.ready, 0);
 	});
 })
