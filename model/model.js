@@ -168,7 +168,8 @@ steal('jquery/class', 'jquery/lang/string', function() {
 		},
 		$method = function( name ) {
 			return function( eventType, handler ) {
-				return $.fn[name].apply($([this]), arguments);
+				var obj = $([this]);
+				return $.fn[name].apply(obj, arguments);
 			}
 		},
 		bind = $method('bind'),
