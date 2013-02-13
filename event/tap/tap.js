@@ -29,7 +29,7 @@ steal('jquery/event/livehack').then(function($){
                 timer;
             function upHandler(event){
                 stop = data(event);
-                if ((Math.abs( start.coords[0] - stop.coords[0] ) < TOLERANCE) ||
+                if ((Math.abs( start.coords[0] - stop.coords[0] ) < TOLERANCE) &&
                     ( Math.abs( start.coords[1] - stop.coords[1] ) < TOLERANCE) ){
                     $.each($.event.find(delegate, ['tap'], selector), function(){
                         this.call(entered, ev, {start : start, end: stop})
@@ -46,6 +46,8 @@ steal('jquery/event/livehack').then(function($){
         });
     }
 
-    registerTapEventHelper('touchstart', 'touchend');
-    registerTapEventHelper('mousedown', 'mouseup');
+    if ('ontouchend' in document) {
+        registerTapEventHelper('touchstart', 'touchend');
+        registerTapEventHelper('mousedown', 'mouseup');
+    }
 });
