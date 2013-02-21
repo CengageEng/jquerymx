@@ -7,13 +7,14 @@ steal('jquery/event/livehack').then(function($){
 
     var data = function(event){
         var d = event.originalEvent.touches ?
-			event.originalEvent.touches[ 0 ] || event.originalEvent.changedTouches[ 0 ] :
-			event;
+			    event.originalEvent.touches[ 0 ] || event.originalEvent.changedTouches[ 0 ] :
+			    event;
+
         return {
-			time: (new Date).getTime(),
-			coords: [ d.pageX, d.pageY ],
-			origin: $( event.target )
-		};
+          time: (new Date).getTime(),
+          coords: [ d.pageX, d.pageY ],
+          origin: $( event.target )
+        };
     };
 
     function registerTapEventHelper(touchStartEvent, touchStopEvent) {
@@ -27,10 +28,12 @@ steal('jquery/event/livehack').then(function($){
                 moved = false,
                 touching = true,
                 timer;
+
             function upHandler(event){
                 stop = data(event);
                 if ((Math.abs( start.coords[0] - stop.coords[0] ) < TOLERANCE) &&
                     ( Math.abs( start.coords[1] - stop.coords[1] ) < TOLERANCE) ){
+                    event.preventDefault();
                     $.each($.event.find(delegate, ['tap'], selector), function(){
                         this.call(entered, ev, {start : start, end: stop})
                     })
@@ -42,12 +45,10 @@ steal('jquery/event/livehack').then(function($){
             }, 500 );
 
             $(delegate).one(touchStopEvent, upHandler);
-
         });
     }
 
     if ('ontouchend' in document) {
         registerTapEventHelper('touchstart', 'touchend');
-        registerTapEventHelper('mousedown', 'mouseup');
     }
 });
