@@ -51,4 +51,8 @@ steal('jquery/event/livehack').then(function($){
     if ('ontouchend' in document) {
         registerTapEventHelper('touchstart', 'touchend');
     }
+
+    if (!(navigator.platform === "iPad" || navigator.platform === "iPad Simulator")) {
+        registerTapEventHelper('mousedown', 'mouseup');
+    }
 });
