@@ -8,7 +8,7 @@ steal('jquery/event/livehack').then(function($){
         });
     }
 
-    if ('ontouchend' in document) {
+    if ('ontouchstart' in document) {
         $.event.setupHelper( ['tapstart'], 'touchstart', handleTapStart);
     }
 
