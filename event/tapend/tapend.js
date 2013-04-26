@@ -4,7 +4,9 @@ steal('jquery/event/livehack').then(function($){
             selector = ev.handleObj.selector,
             entered = this;
         $.each($.event.find(delegate, ['tapend'], selector), function(){
-            this.call(entered, ev, {})
+            if( !(ev.isPropagationStopped() || ev.isImmediatePropagationStopped()) ) {
+                this.call(entered, ev, {});
+            }
         });
     }
 

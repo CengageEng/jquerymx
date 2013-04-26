@@ -123,7 +123,8 @@ steal('jquery/event').then(function() {
 			onFirst = startingEvent;
 			startingEvent = null;
 		}
-		var add = function( handleObj ) {
+
+		function add( handleObj ) {
 
 			var bySelector, selector = handleObj.selector || "";
 			if ( selector ) {
@@ -142,25 +143,26 @@ steal('jquery/event').then(function() {
 				}
 
 			}
+		}
 
-		},
-			remove = function( handleObj ) {
-				var bySelector, selector = handleObj.selector || "";
-				if ( selector ) {
-					bySelector = event.find(this, types, selector);
-					if (!bySelector.length ) {
-						$(this).undelegate(selector, startingEvent, onFirst);
-					}
-				}
-				else {
-					if (!event.find(this, types, selector).length ) {
-						event.remove(this, startingEvent, onFirst, {
-							selector: selector,
-							delegate: this
-						});
-					}
-				}
-			};
+		function remove(handleObj) {
+            var bySelector, selector = handleObj.selector || "";
+            if ( selector ) {
+                bySelector = event.find(this, types, selector);
+                if (!bySelector.length ) {
+                    $(this).undelegate(selector, startingEvent, onFirst);
+                }
+            }
+            else {
+                if (!event.find(this, types, selector).length ) {
+                    event.remove(this, startingEvent, onFirst, {
+                        selector: selector,
+                        delegate: this
+                    });
+                }
+            }
+		};
+
 		$.each(types, function() {
 			event.special[this] = {
 				add: add,
