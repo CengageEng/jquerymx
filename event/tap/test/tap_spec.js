@@ -22,8 +22,26 @@ steal('thirdparty/jasmine/jasmine-jquery.js').then('jquery/event/tap', function(
             expect(called).toBeTruthy();
         });
 
-        function createEvent(eventName, x, y) {
+        it('should not call the handler when propagation has been stopped', function() {
+            $(element).trigger(createEvent("mousedown", 100, 100, false, true));
+            $(element).trigger(createEvent("mouseup", 100, 100));
+            expect(called).toBeFalsy();
+        });
+
+        it('should not call the handler when immediate propagation has been stopped', function() {
+            $(element).trigger(createEvent("mousedown", 100, 100, true, false));
+            $(element).trigger(createEvent("mouseup", 100, 100));
+            expect(called).toBeFalsy();
+        });
+
+        function createEvent(eventName, x, y, immProp, prop) {
             var event = jQuery.Event(eventName);
+            event.isImmediatePropagationStopped = function() {
+                return immProp ? true : false;
+            }
+            event.isPropagationStopped = function() {
+                return prop ? true : false;
+            }
             event.originalEvent = {};
             event.pageX = x;
             event.pageY = y;

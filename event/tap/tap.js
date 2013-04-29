@@ -24,13 +24,14 @@ steal('jquery/event/livehack').then(function($){
                 stop,
                 delegate = ev.delegateTarget || ev.currentTarget,
                 selector = ev.handleObj.selector,
-                entered = this;
+                 entered = this;
 
             function upHandler(event){
                 stop = data(event);
                 if ((Math.abs( start.coords[0] - stop.coords[0] ) < TOLERANCE) &&
                     ( Math.abs( start.coords[1] - stop.coords[1] ) < TOLERANCE) ){
                     event.preventDefault();
+
                     $.each($.event.find(delegate, ['tap'], selector), function(){
                         if( !(ev.isPropagationStopped() || ev.isImmediatePropagationStopped()) ) {
                             this.call(entered, ev, {start : start, end: stop})
