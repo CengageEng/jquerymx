@@ -1,4 +1,4 @@
-steal('jquery/event').then(function() {
+define(['jquery/event/event'], function() {
 
 	var event = jQuery.event,
 
@@ -172,4 +172,6 @@ steal('jquery/event').then(function() {
 			};
 		});
 	};
+
+    return jQuery;
 });

@@ -1,4 +1,4 @@
-steal('jquery/event/livehack').then(function($){
+define(['jquery/event/livehack/livehack', 'jquery/mindtap/browserDetection'], function($, browser){
     function handleTapStart(ev) {
         var delegate = ev.delegateTarget || ev.currentTarget,
             selector = ev.handleObj.selector,
@@ -14,7 +14,7 @@ steal('jquery/event/livehack').then(function($){
         $.event.setupHelper( ['tapstart'], 'touchstart', handleTapStart);
     }
 
-    if (!(navigator.platform === "iPad" || navigator.platform === "iPad Simulator")) {
+    if (!browser.isMobile(window.navigator)) {
         $.event.setupHelper( ['tapstart'], 'mousedown', handleTapStart);
     }
 });

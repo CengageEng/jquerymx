@@ -2,7 +2,7 @@
  * @add jQuery.event.special
  */
 
-steal('jquery/event/livehack').then(function($){
+define(['jquery/event/livehack/livehack', 'jquery/mindtap/browserDetection'], function($, browser){
     var TOLERANCE = 10;
 
     var data = function(event){
@@ -52,7 +52,7 @@ steal('jquery/event/livehack').then(function($){
         registerTapEventHelper('touchstart', 'touchend');
     }
 
-    if (!(navigator.platform === "iPad" || navigator.platform === "iPad Simulator")) {
+    if (!browser.isMobile(window.navigator)) {
         registerTapEventHelper('mousedown', 'mouseup');
     }
 });
