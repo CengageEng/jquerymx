@@ -37,6 +37,10 @@ steal('jquery/dom').then(function( $ ) {
 			i = 0,
 			left, rsLeft, camelCase, name;
 
+        if(currentS === undefined) {
+            return {};
+        }
+
 		for (; i < styles.length; i++ ) {
 			name = styles[i];
 			oldName = name.replace(rdashAlpha, fcamelCase);
