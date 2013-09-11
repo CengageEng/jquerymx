@@ -148,6 +148,12 @@ steal('jquery/class', 'jquery/lang/string', function() {
 				args.unshift(getId(self))
 			}
 
+			// destroy does need data in some cases,
+			// for backward compatibilty passing is as last param
+			if ( type == 'destroy' ) {
+				args.shift();
+			}
+
 			// hook up success and error
 			deferred.then(success);
 			deferred.fail(error);
