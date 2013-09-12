@@ -150,8 +150,8 @@ steal('jquery/class', 'jquery/lang/string', function() {
 
 			// destroy does need data in some cases,
 			// for backward compatibilty passing is as last param
-			if ( type == 'destroy' ) {
-				args.shift();
+			if ( type === 'destroy' ) {
+				args.push(self.serialize());
 			}
 
 			// hook up success and error
