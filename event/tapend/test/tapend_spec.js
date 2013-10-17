@@ -1,4 +1,4 @@
-steal('thirdparty/jasmine/jasmine-jquery.js').then('jquery/event/tapend', function() {
+steal('thirdparty/jasmine-jquery/jasmine-jquery.js').then('jquery/event/tapend', function() {
     describe('tapend.js', function() {
         var element,
             called;

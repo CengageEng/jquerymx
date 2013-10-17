@@ -1,4 +1,4 @@
-steal('thirdparty/jasmine/jasmine-jquery.js', 'jquery/event/tapstart', function() {
+steal('thirdparty/jasmine-jquery/jasmine-jquery.js', 'jquery/event/tapstart', function() {
     describe('tapstart.js', function() {
         var element,
             called;

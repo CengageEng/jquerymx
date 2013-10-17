@@ -1,4 +1,4 @@
-steal('thirdparty/jasmine/jasmine-jquery.js').then('jquery/event/tap', function() {
+steal('thirdparty/jasmine-jquery/jasmine-jquery.js').then('jquery/event/tap', function() {
     describe('tap.js', function() {
         var element,
             called;
