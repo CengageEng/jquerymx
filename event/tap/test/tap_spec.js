@@ -1,5 +1,4 @@
 require([
-    'thirdparty/jasmine-jquery/jasmine-jquery',
     'jquery/event/tap/tap'
 ], function() {
     describe('tap.js', function() {

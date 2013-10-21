@@ -1,5 +1,4 @@
 require([
-    'thirdparty/jasmine-jquery/jasmine-jquery',
     'jquery/event/tapend/tapend'
 ], function() {
     describe('tapend.js', function() {

@@ -1,5 +1,4 @@
 require([
-    'thirdparty/jasmine-jquery/jasmine-jquery',
     'jquery/event/tapstart/tapstart'
 ], function() {
     describe('tapstart.js', function() {
