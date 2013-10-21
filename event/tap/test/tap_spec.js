@@ -4,6 +4,7 @@ require([
     describe('tap.js', function() {
         var element,
             called;
+
         beforeEach(function(){
             called = false;
             element = affix('#test-element');
@@ -27,26 +28,30 @@ require([
         }
 
         xit('should call the handler when touch events', function() {
-            $(element).trigger(createEvent("touchstart", 100, 100));
-            $(element).trigger(createEvent("touchend", 100, 100));
+            $(element)
+                .trigger(createEvent("touchstart", 100, 100))
+                .trigger(createEvent("touchend", 100, 100));
             expect(called).toBeTruthy();
         });
 
         it('should call the handler when mouse events', function() {
-            $(element).trigger(createEvent("mousedown", 100, 100));
-            $(element).trigger(createEvent("mouseup", 100, 100));
+            $(element)
+                .trigger(createEvent("mousedown", 100, 100))
+                .trigger(createEvent("mouseup", 100, 100));
             expect(called).toBeTruthy();
         });
 
         it('should not call the handler when propagation has been stopped', function() {
-            $(element).trigger(createEvent("mousedown", 100, 100, false, true));
-            $(element).trigger(createEvent("mouseup", 100, 100));
+            $(element)
+                .trigger(createEvent("mousedown", 100, 100, false, true))
+                .trigger(createEvent("mouseup", 100, 100));
             expect(called).toBeFalsy();
         });
 
         it('should not call the handler when immediate propagation has been stopped', function() {
-            $(element).trigger(createEvent("mousedown", 100, 100, true, false));
-            $(element).trigger(createEvent("mouseup", 100, 100));
+            $(element)
+                .trigger(createEvent("mousedown", 100, 100, true, false))
+                .trigger(createEvent("mouseup", 100, 100));
             expect(called).toBeFalsy();
         });
     });

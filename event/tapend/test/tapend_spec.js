@@ -4,6 +4,7 @@ require([
     describe('tapend.js', function() {
         var element,
             called;
+
         beforeEach(function(){
             called = false;
             element = affix('#test-element');
