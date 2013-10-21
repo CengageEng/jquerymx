@@ -50,5 +50,31 @@ require([
             $(element).trigger(createEvent("mouseup", 100, 100));
             expect(called).toBeFalsy();
         });
+
+        it('should take 3 seconds to do something just to see if this helps with testswarm', function() {
+          var done = false;
+          runs(function() {
+            setTimeout(function() {
+              done = true;
+            }, 3 * 1000);
+          });
+
+          waitsFor(function() {
+            return done === true;
+          });
+        });
+
+        it('should take another 3 seconds to do something just to see if this helps with testswarm', function() {
+          var done = false;
+          runs(function() {
+            setTimeout(function() {
+              done = true;
+            }, 3 * 1000);
+          });
+
+          waitsFor(function() {
+            return done === true;
+          });
+        });
     });
 });
