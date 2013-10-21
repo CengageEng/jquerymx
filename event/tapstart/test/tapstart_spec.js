@@ -1,4 +1,7 @@
-steal('thirdparty/jasmine-jquery/jasmine-jquery.js', 'jquery/event/tapstart', function() {
+require([
+    'thirdparty/jasmine-jquery/jasmine-jquery',
+    'jquery/event/tapstart/tapstart'
+], function() {
     describe('tapstart.js', function() {
         var element,
             called;
@@ -9,6 +12,17 @@ steal('thirdparty/jasmine-jquery/jasmine-jquery.js', 'jquery/event/tapstart', fu
                 called = true;
             });
         });
+
+        function createEvent(eventName, immProp, prop) {
+            var event = jQuery.Event(eventName);
+            event.isImmediatePropagationStopped = function() {
+                return immProp ? true : false;
+            }
+            event.isPropagationStopped = function() {
+                return prop ? true : false;
+            }
+            return event;
+        }
 
         xit('should call the handler when touchstart', function() {
             $(element).trigger('touchstart');
@@ -29,16 +43,5 @@ steal('thirdparty/jasmine-jquery/jasmine-jquery.js', 'jquery/event/tapstart', fu
             $(element).trigger(createEvent('mouseup', true, false));
             expect(called).toBeFalsy();
         });
-
-        function createEvent(eventName, immProp, prop) {
-            var event = jQuery.Event(eventName);
-            event.isImmediatePropagationStopped = function() {
-                return immProp ? true : false;
-            }
-            event.isPropagationStopped = function() {
-                return prop ? true : false;
-            }
-            return event;
-        }
     });
 });

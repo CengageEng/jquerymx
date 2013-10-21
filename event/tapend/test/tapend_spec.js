@@ -1,4 +1,7 @@
-steal('thirdparty/jasmine-jquery/jasmine-jquery.js').then('jquery/event/tapend', function() {
+require([
+    'thirdparty/jasmine-jquery/jasmine-jquery',
+    'jquery/event/tapend/tapend'
+], function() {
     describe('tapend.js', function() {
         var element,
             called;
@@ -9,6 +12,17 @@ steal('thirdparty/jasmine-jquery/jasmine-jquery.js').then('jquery/event/tapend',
                 called = true;
             });
         });
+
+        function createEvent(eventName, immProp, prop) {
+            var event = jQuery.Event(eventName);
+            event.isImmediatePropagationStopped = function() {
+                return immProp ? true : false;
+            }
+            event.isPropagationStopped = function() {
+                return prop ? true : false;
+            }
+            return event;
+        }
 
         xit('should call the handler when touchend', function() {
             $(element).trigger('touchend');
@@ -29,16 +43,5 @@ steal('thirdparty/jasmine-jquery/jasmine-jquery.js').then('jquery/event/tapend',
             $(element).trigger(createEvent('mouseup', true, false));
             expect(called).toBeFalsy();
         });
-
-        function createEvent(eventName, immProp, prop) {
-            var event = jQuery.Event(eventName);
-            event.isImmediatePropagationStopped = function() {
-                return immProp ? true : false;
-            }
-            event.isPropagationStopped = function() {
-                return prop ? true : false;
-            }
-            return event;
-        }
     });
 });
