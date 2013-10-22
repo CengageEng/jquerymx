@@ -1,4 +1,5 @@
 require([
+    'jquery/jquery',
     'jquery/event/tap/tap'
 ], function() {
     describe('tap.js', function() {
@@ -26,13 +27,6 @@ require([
             event.pageY = y;
             return event;
         }
-
-        xit('should call the handler when touch events', function() {
-            $(element)
-                .trigger(createEvent("touchstart", 100, 100))
-                .trigger(createEvent("touchend", 100, 100));
-            expect(called).toBeTruthy();
-        });
 
         it('should call the handler when mouse events', function() {
             $(element)

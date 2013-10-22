@@ -1,4 +1,5 @@
 require([
+    'jquery/jquery',
     'jquery/event/tapend/tapend'
 ], function() {
     describe('tapend.js', function() {
@@ -23,11 +24,6 @@ require([
             }
             return event;
         }
-
-        xit('should call the handler when touchend', function() {
-            $(element).trigger('touchend');
-            expect(called).toBeTruthy();
-        });
 
         it('should call the handler when mouseup', function() {
             $(element).trigger('mouseup');

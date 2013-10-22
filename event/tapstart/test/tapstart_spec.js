@@ -1,4 +1,5 @@
 require([
+    'jquery/jquery',
     'jquery/event/tapstart/tapstart'
 ], function() {
     describe('tapstart.js', function() {
@@ -23,11 +24,6 @@ require([
             }
             return event;
         }
-
-        xit('should call the handler when touchstart', function() {
-            $(element).trigger('touchstart');
-            expect(called).toBeTruthy();
-        });
 
         it('should call the handler when mousedown', function() {
             $(element).trigger('mousedown');
