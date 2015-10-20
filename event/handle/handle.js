@@ -1,4 +1,4 @@
-steal("jquery").then(function(){
+steal("jquery", function(){
 	
 var $event = $.event, 
 	oldTrigger = $event.trigger, 

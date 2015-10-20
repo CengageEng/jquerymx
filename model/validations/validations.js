@@ -1,4 +1,4 @@
-steal('jquery/model').then(function($){
+steal('jquery/model', function($){
 /**
 @page jquery.model.validations Validations
 @plugin jquery/model/validations

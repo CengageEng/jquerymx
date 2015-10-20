@@ -18,7 +18,7 @@
  * specific language governing permissions and limitations under the License.
  *
  ******************************************************************************/
-steal.then(function(){
+steal(function(){
 // prevent re-definition of the OpenAjax object
 if(!window["OpenAjax"]){
 	/**

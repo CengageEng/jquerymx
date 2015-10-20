@@ -1,4 +1,4 @@
-steal('jquery/model').then(function( $ ) {
+steal('jquery/model', function( $ ) {
 
 	var getArgs = function( args ) {
 		if ( args[0] && ($.isArray(args[0])) ) {

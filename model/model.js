@@ -1,8 +1,7 @@
 /*global OpenAjax: true */
-
 steal('jquery/class', 'jquery/lang/string', function() {
-
-	// Common helper methods taken from jQuery (or other places)
+    console.log('isJqueryModel');
+    // Common helper methods taken from jQuery (or other places)
 	// Keep here so someday can be abstracted
 	var $String = $.String,
 		getObject = $String.getObject,

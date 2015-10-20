@@ -1,5 +1,5 @@
 
-steal('jquery/event').then(function($){
+steal('jquery/event', function($){
 
 /**
  * @function jQuery.fn.triggerAsync

@@ -1,4 +1,4 @@
-steal('jquery/event/livehack').then(function($){
+steal('jquery/event/livehack', function($){
 // TODO remove this, phantom supports touch AND click, but need to make funcunit support touch so its testable
 var isPhantom = /Phantom/.test(navigator.userAgent),
 	supportTouch = !isPhantom && "ontouchend" in document,
