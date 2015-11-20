@@ -1,4 +1,4 @@
-steal('jquery/event/default').then(function($){
+steal('jquery/event/default', function($){
 
 
 var current,

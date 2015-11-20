@@ -1,4 +1,4 @@
-steal('jquery/class').then(function() {
+steal('jquery/class', function() {
 
 	// Alias helpful methods from jQuery
 	var isArray = $.isArray,

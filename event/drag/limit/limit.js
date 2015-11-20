@@ -2,7 +2,7 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery/event/drag', 'jquery/dom/cur_styles').then(function( $ ) {
+steal('jquery/event/drag', 'jquery/dom/cur_styles', function( $ ) {
 
 
 	$.Drag.prototype

@@ -1,4 +1,4 @@
-steal('jquery/controller').then(function($){
+steal('jquery/controller', function($){
 
 /**
  * @class jQuery.Tie

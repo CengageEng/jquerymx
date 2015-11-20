@@ -1,5 +1,5 @@
 
-steal('jquery/dom/cur_styles').then(function($) {
+steal('jquery/dom/cur_styles', function($) {
 /**
  * @page dimensions dimensions
  * @parent dom

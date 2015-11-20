@@ -2,7 +2,7 @@
  * @add jQuery.event.special
  */
 
-steal('jquery/event/livehack').then(function($){
+steal('jquery/event/livehack', function($){
     function registerTapEventHelper(touchStartEvent) {
         $.event.setupHelper( ['dbltap'], touchStartEvent, function(ev){
 
