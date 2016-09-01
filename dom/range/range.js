@@ -1,4 +1,4 @@
-steal('jquery','jquery/dom/compare', function($){
+define(['jquery/jquery','jquery/dom/compare/compare'], function($){
 // TODOS ...
 // Ad
 

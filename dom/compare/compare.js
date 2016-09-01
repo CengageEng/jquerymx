@@ -1,7 +1,7 @@
 /**
  *  @add jQuery.fn
  */
-steal('jquery/dom', function($){
+define(['jquery/dom/dom'], function($){
 /**
  * @function compare
  * @parent dom

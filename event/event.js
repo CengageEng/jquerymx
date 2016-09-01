@@ -39,4 +39,4 @@
  * ## 
  * 
  */
-steal('jquery');
+define(['jquery/jquery'], function(){});

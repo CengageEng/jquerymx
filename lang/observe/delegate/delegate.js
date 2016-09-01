@@ -1,4 +1,4 @@
-steal('jquery/lang/observe',function(){
+define(['jquery/lang/observe/observe'],function(){
 	
 	/**
 	 * @add jQuery.Observe.prototype

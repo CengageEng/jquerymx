@@ -1,4 +1,4 @@
-steal('jquery/lang/json',function() {
+define(['jquery/lang/json/json'],function() {
     // break
     /**
      * @function jQuery.cookie
