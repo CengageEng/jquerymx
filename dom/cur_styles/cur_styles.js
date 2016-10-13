@@ -1,4 +1,4 @@
-steal('jquery/dom', function( $ ) {
+define(['jquery/dom/dom'], function( $ ) {
 
 	var getComputedStyle = document.defaultView && document.defaultView.getComputedStyle,
 		rupper = /([A-Z])/g,

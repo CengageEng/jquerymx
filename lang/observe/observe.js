@@ -1,4 +1,4 @@
-steal('jquery/class', function() {
+define(['jquery/class/class'], function() {
 
 	// Alias helpful methods from jQuery
 	var isArray = $.isArray,

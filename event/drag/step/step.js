@@ -2,7 +2,7 @@
  * @add jQuery.Drag.prototype
  */
 
-steal('jquery/event/drag', 'jquery/dom/cur_styles', function( $ ) {
+define(['jquery/event/drag/drag', 'jquery/dom/cur_styles/cur_styles'], function( $ ) {
 	var round = function( x, m ) {
 		return Math.round(x / m) * m;
 	}

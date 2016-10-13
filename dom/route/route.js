@@ -1,4 +1,4 @@
-steal('jquery/lang/observe', 'jquery/lang/observe/delegate', 'jquery/event/hashchange', 'jquery/lang/string/deparam',
+define(['jquery/lang/observe/observe', 'jquery/lang/observe/delegate/delegate', 'jquery/event/hashchange/hashchange', 'jquery/lang/string/deparam/deparam'],
 function( $ ) {
 
     // Helper methods used for matching routes.

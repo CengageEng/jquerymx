@@ -92,7 +92,7 @@
  *     })
  *    
  */
-steal('jquery', function($){
+define(['jquery/jquery'], function($){
   '$:nomunge'; // Used by YUI compressor.
   
   // Method / object references.

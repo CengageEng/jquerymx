@@ -1,5 +1,5 @@
 /*global OpenAjax: true */
-steal('jquery/class', 'jquery/lang/string', function() {
+define(['jquery/class/class', 'jquery/lang/string/string'], function() {
     // Common helper methods taken from jQuery (or other places)
 	// Keep here so someday can be abstracted
 	var $String = $.String,

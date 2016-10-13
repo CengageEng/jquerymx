@@ -1,7 +1,7 @@
 /**
  * @add jQuery.event.special
  */
-steal('jquery/event', function( $ ) {
+define(['jquery/event/event'], function( $ ) {
 	/**
 	 * @attribute destroyed
 	 * @parent specialevents

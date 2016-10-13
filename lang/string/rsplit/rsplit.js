@@ -1,4 +1,4 @@
-steal('jquery/lang/string',function( $ ) {
+define(['jquery/lang/string/string'],function( $ ) {
 	/**
 	 * @add jQuery.String
 	 */
